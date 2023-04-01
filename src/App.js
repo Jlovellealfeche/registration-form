@@ -20,20 +20,28 @@ function App() {
 
   const getIsFormValid = () => {
     // Implement this function
-    return true;
+    return (
+      firstName &&
+      validateEmail(email) &&
+      password.value.length >= 8 &&
+      role !== "role"
+    );
   };
 
   const clearForm = () => {
     // Implement this function
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPassword({
+      value: "",
+      isTouched: false,
+    });
+    setRole("role");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setPassword("");
-    setRole("");
     alert("Account created!");
     clearForm();
   };
@@ -79,13 +87,19 @@ function App() {
             <input type="password" 
             placeholder="Password"
             value={password}
-            onChange={e => setPassword(e.target.value)} />
+            onChange={e => setPassword(e.target.value)} 
+            onBlur={() => {
+              setPassword({ ...password, isTouched: true });
+            }}/>
+            {password.isTouched && password.value.length < 8 ? (
+              <PasswordErrorMessage />
+            ) :null}
           </div>
           <div className="Field">
             <label>
               Role <sup>*</sup>
             </label>
-            <select>
+            <select value={role} onChange={(e) => setRole(e.target.value)}>
               <option value="role">Role</option>
               <option value="individual">Individual</option>
               <option value="business">Business</option>
