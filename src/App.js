@@ -30,6 +30,9 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPassword("");
     alert("Account created!");
     clearForm();
   };
