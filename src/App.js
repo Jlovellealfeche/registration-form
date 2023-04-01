@@ -33,6 +33,7 @@ function App() {
     setLastName("");
     setEmail("");
     setPassword("");
+    setRole("");
     alert("Account created!");
     clearForm();
   };
